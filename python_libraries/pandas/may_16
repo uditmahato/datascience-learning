@@ -1,0 +1,29 @@
+Pandas
+-------
+taxi_own_veh = taxi_owners.merge(taxi_veh, on='vid', suffixes=('_own','_veh'))
+
+# Print the first few rows of the census_altered table to view the change 
+print(census_altered[['ward']].head())
+
+# Merge the wards and census_altered tables on the ward column
+wards_census_altered = wards.merge(census_altered,on="ward")
+
+# Print the shape of wards_census_altered
+print('wards_census_altered table shape:', wards_census_altered.shape)
+
+
+reviews_per_country = reviews.country.value_counts()
+
+centered_price = reviews.price.map(lambda p : p - reviews.price.mean())
+
+# Merge the licenses and biz_owners table on account
+licenses_owners = licenses.merge(biz_owners, on='account')
+
+# Group the results by title then count the number of accounts
+counted_df = licenses_owners.groupby('title').agg({'account':'count'})
+
+# Sort the counted_df in desending order
+sorted_df = counted_df.sort_values(by='account', ascending=False)
+
+# Use .head() method to print the first few rows of sorted_df
+print(sorted_df.head())
